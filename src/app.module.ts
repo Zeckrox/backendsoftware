@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TablesModule } from './tables/tables.module';
+import { CubiclesModule } from './cubicles/cubicles.module';
+import { ReservationsModule } from './reservations/reservations.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +22,12 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
 
     UsersModule,
+
+    TablesModule,
+
+    CubiclesModule,
+
+    ReservationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

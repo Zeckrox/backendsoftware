@@ -10,7 +10,6 @@ import { User, UserSchema } from './schema/users.schema';
     MongooseModule.forFeature([
       {
         name: User.name, ///en app era para conectarse a bd, aqui es para conectarse directamente a coleccion users
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         schema: UserSchema,
       },
     ]),
