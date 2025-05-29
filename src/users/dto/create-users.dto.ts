@@ -19,4 +19,8 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   career: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }

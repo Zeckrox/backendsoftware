@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TablesModule } from './tables/tables.module';
 import { CubiclesModule } from './cubicles/cubicles.module';
 import { ReservationsModule } from './reservations/reservations.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,6 +29,8 @@ import { ReservationsModule } from './reservations/reservations.module';
     CubiclesModule,
 
     ReservationsModule,
+
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -19,6 +19,9 @@ export class User extends Document {
   @Prop({ required: true })
   career: string;
 
+  @Prop({ required: true })
+  password: string;
+
   //No user id, no necesitamos un campo llamado userId que referencia al mismo modelo User, es decir un usuario tiene un campo userId que apunta a otro usuario
 }
 
