@@ -19,8 +19,4 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   career: string;
-
-  // @IsString()
-  // @IsNotEmpty()
-  // userId: string; //llega como texto en la peticion
 }

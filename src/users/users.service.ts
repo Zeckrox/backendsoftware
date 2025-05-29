@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-users.dto';
 import { UpdateUserDto } from './dto/update-users.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schema/users.schema';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -19,27 +19,25 @@ export class UsersService {
     }
   }
 
-  // create(createUserDto: CreateUserDto) {
-  //   return 'This action adds a new user';
-  // }
-
   async findAll() {
-
+    return this.userModel.find().exec();
   }
 
-  // findAll() {
-  //   return `This action returns all users`;
-  // }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: ObjectId) {
+    return this.userModel.findById(id).exec();
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: ObjectId, updateUserDto: UpdateUserDto) {
+    await this.userModel.findByIdAndUpdate(id, updateUserDto);
+    return this.userModel.findById(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: ObjectId) {
+    try{
+      if(!await this.userModel.findById(id)) throw new Error("Usuario no existe");
+      return this.userModel.findByIdAndDelete(id)
+    }catch(error){
+      throw new Error(`Error al borrar el usuario: ${error.message}`);
+    }
   }
 }
