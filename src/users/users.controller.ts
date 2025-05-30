@@ -5,6 +5,7 @@ import { UpdateUserDto } from './dto/update-users.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ObjectId } from 'mongoose';
 
+
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -15,7 +16,7 @@ export class UsersController {
   }
 
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.usersService.findAll();

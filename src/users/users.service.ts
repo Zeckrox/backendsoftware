@@ -1,4 +1,5 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-users.dto';
 import { UpdateUserDto } from './dto/update-users.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,7 +14,10 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     try {
       const createdUser = new this.userModel(createUserDto);
-      return await createdUser.save();
+      createdUser.password = await bcrypt.hash(createdUser.password, 10);
+      let temp: any = await createdUser.save();
+      temp.password = undefined;
+      return temp;
     } catch (error) {
       throw new Error(`Error al crear usuario: ${error.message}`);
     }
