@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-users.dto';
 import { UpdateUserDto } from './dto/update-users.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -37,7 +37,10 @@ export class UsersService {
 
   async update(id: ObjectId, updateUserDto: UpdateUserDto) {
     await this.userModel.findByIdAndUpdate(id, updateUserDto);
-    return this.userModel.findById(id);
+    const user = await this.userModel.findById(id)
+    if (!user) throw new NotFoundException("User not found")
+    user.password = await bcrypt.hash(user.password, 10);
+    return user.save();
   }
 
   async remove(id: ObjectId) {
