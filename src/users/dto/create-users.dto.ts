@@ -20,7 +20,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   career: string;
 
-  // @IsString()
-  // @IsNotEmpty()
-  // userId: string; //llega como texto en la peticion
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }

@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TablesModule } from './tables/tables.module';
 import { CubiclesModule } from './cubicles/cubicles.module';
 import { ReservationsModule } from './reservations/reservations.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,8 +27,8 @@ import { ReservationsModule } from './reservations/reservations.module';
     CubiclesModule,
 
     ReservationsModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+
+    AuthModule,
+  ]
 })
 export class AppModule {}
