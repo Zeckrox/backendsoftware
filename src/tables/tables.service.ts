@@ -18,23 +18,31 @@ export class TablesService {
     }
   }
 
-  // create(createTableDto: CreateTableDto) {
-  //   return 'This action adds a new table';
-  // }
-
-  findAll() {
-    return `This action returns all tables`;
+  async findAll() {
+    try {
+      return await this.tableModel.find().exec();
+    } catch (error) {
+      throw new Error(`Error fetching tables: ${error.message}`);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} table`;
+  findOne(id: string) {
+    try {
+      return this.tableModel.findById(id).exec();
+    } catch (error) {
+      throw new Error(`Error fetching table with id ${id}: ${error.message}`);
+    }
   }
 
-  update(id: number, updateTableDto: UpdateTableDto) {
-    return `This action updates a #${id} table`;
+  async update(id: string, updateTableDto: UpdateTableDto) {
+    return this.tableModel.findByIdAndUpdate(id, updateTableDto, { new: true }).exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} table`;
+  async remove(id: string) {
+    try {
+      await this.tableModel.findByIdAndDelete(id).exec();
+    } catch (error) {
+      throw new Error(`Error removing table with id ${id}: ${error.message}`);
+    }
   }
 }
