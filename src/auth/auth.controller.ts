@@ -21,4 +21,9 @@ export class AuthController {
   getToken(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
+
+  @Post("hi")
+  idk(){
+    return "IDK"
+  }
 }
