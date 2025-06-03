@@ -27,29 +27,28 @@ export class UsersService {
     return this.userModel.find().exec();
   }
 
-  // findOne(id: ObjectId) {
-  //   return this.userModel.findById(id).exec();
-  // }
+  findOne(id: ObjectId) {
+    return this.userModel.findById(id).exec();
+  }
 
   findOneByEmail(email: string) {
     return this.userModel.findOne({email})
   }
 
-  // async update(id: ObjectId, updateUserDto: UpdateUserDto) {
-  //   await this.userModel.findByIdAndUpdate(id, updateUserDto);
-  //   const user = await this.userModel.findById(id)
-  //   if (!user) throw new NotFoundException("User not found")
-  //   user.password = await bcrypt.hash(user.password, 10);
-  //   return user.save();
-  // }
+  async update(id: ObjectId, updateUserDto: UpdateUserDto) {
+    await this.userModel.findByIdAndUpdate(id, updateUserDto);
+    const user = await this.userModel.findById(id)
+    if (!user) throw new NotFoundException("User not found")
+    user.password = await bcrypt.hash(user.password, 10);
+    return user.save();
+  }
 
-  // async remove(id: ObjectId) {
-  //   try{
-  //     if(!await this.userModel.findById(id)) throw new Error("Usuario no existe");
-  //     return this.userModel.findByIdAndDelete(id)
-  //   }catch(error){
-  //     throw new Error(`Error al borrar el usuario: ${error.message}`);
-  //   }
-  // }
-  
+  async remove(id: ObjectId) {
+    try{
+      if(!await this.userModel.findById(id)) throw new Error("Usuario no existe");
+      return this.userModel.findByIdAndDelete(id)
+    }catch(error){
+      throw new Error(`Error al borrar el usuario: ${error.message}`);
+    }
+  }
 }
