@@ -6,7 +6,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   
-  @Get()
+  @Get('login')
   hi() {
       return "Hello there";
     }
