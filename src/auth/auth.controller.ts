@@ -14,6 +14,11 @@ export class AuthController {
 
   @Post('login')
   signIn(@Body() signInDto: SignInDto) {
-    return "BYE";
+    return this.authService.signIn(signInDto.email, signInDto.password);
+  }
+
+  @Post('/token')
+  getToken(@Body() signInDto: SignInDto) {
+    return this.authService.signIn(signInDto.email, signInDto.password);
   }
 }
