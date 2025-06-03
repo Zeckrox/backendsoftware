@@ -51,4 +51,5 @@ export class UsersService {
       throw new Error(`Error al borrar el usuario: ${error.message}`);
     }
   }
+  
 }
