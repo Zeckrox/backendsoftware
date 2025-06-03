@@ -5,7 +5,10 @@ import { Document } from 'mongoose';
 export class User extends Document {
   //Mongoose trabaja con documentos y cada documento tiene propiedades. Al extiender Document, entonces la clase User hereda todo eso
   @Prop({ required: true })
-  fullName: string;
+  firstName: string;
+
+  @Prop({ required: true })
+  lastName: string;
 
   @Prop({ required: true, unique: true })
   email: string;
