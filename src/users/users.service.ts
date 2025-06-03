@@ -11,7 +11,7 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   //conexion con bd siempre debe ser asincrona
-  async create(createUserDto: Partial<CreateUserDto>) {
+  async create(createUserDto: CreateUserDto) {
     try {
       const createdUser = new this.userModel(createUserDto);
       createdUser.password = await bcrypt.hash(createdUser.password, 10);
