@@ -18,23 +18,31 @@ export class CubiclesService {
     }
   }
 
-  // create(createCubicleDto: CreateCubicleDto) {
-  //   return 'This action adds a new cubicle';
-  // }
-
-  findAll() {
-    return `This action returns all cubicles`;
+  async findAll() {
+    try {
+      return await this.cubicleModel.find().exec();
+    } catch (error) {
+      throw new Error(`Error fetching cubicles: ${error.message}`);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cubicle`;
+  findOne(id: string) {
+    try {
+      return this.cubicleModel.findById(id).exec();
+    } catch (error) {
+      throw new Error(`Error fetching cubicle with id ${id}: ${error.message}`);
+    }
   }
 
-  update(id: number, updateCubicleDto: UpdateCubicleDto) {
-    return `This action updates a #${id} cubicle`;
+  async update(id: string, updateCubicleDto: UpdateCubicleDto) {
+    return this.cubicleModel.findByIdAndUpdate(id, updateCubicleDto, { new: true }).exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cubicle`;
+  remove(id: string) {
+    try {
+      return this.cubicleModel.findByIdAndDelete(id).exec();
+    } catch (error) {
+      throw new Error(`Error removing cubicle with id ${id}: ${error.message}`);
+    }
   }
 }
