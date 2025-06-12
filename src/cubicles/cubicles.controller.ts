@@ -19,16 +19,16 @@ export class CubiclesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cubiclesService.findOne(+id);
+    return this.cubiclesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCubicleDto: UpdateCubicleDto) {
-    return this.cubiclesService.update(+id, updateCubicleDto);
+    return this.cubiclesService.update(id, updateCubicleDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cubiclesService.remove(+id);
+    return this.cubiclesService.remove(id);
   }
 }

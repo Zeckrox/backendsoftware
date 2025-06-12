@@ -3,9 +3,12 @@ import { Document } from 'mongoose';
 
 @Schema({ timestamps: true }) // crea createdAt y updatedAt
 export class User extends Document {
-  //Mongoose trabaja con documentos y cada documento tiene propiedades. Al extiender Document, entonces la clase User hereda todo eso
+  //mongoose trabaja con documentos y cada documento tiene propiedades. Al extiender Document, entonces la clase User hereda todo eso
   @Prop({ required: true })
-  fullName: string;
+  firstName: string;
+
+  @Prop({ required: true })
+  lastName: string;
 
   @Prop({ required: true, unique: true })
   email: string;
@@ -22,8 +25,7 @@ export class User extends Document {
   @Prop({ required: true })
   password: string;
 
-  //No user id, no necesitamos un campo llamado userId que referencia al mismo modelo User, es decir un usuario tiene un campo userId que apunta a otro usuario
+  //no user id, no necesitamos un campo llamado userId que referencia al mismo modelo User, es decir un usuario tiene un campo userId que apunta a otro usuario
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 export const UserSchema = SchemaFactory.createForClass(User);
