@@ -1,5 +1,10 @@
 import * as bcrypt from 'bcrypt';
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-users.dto';
 import { UpdateUserDto } from './dto/update-users.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -23,7 +28,7 @@ export class UsersService {
       temp.password = undefined;
       return temp;
     } catch (error) {
-      throw new Error(`Error al crear usuario: ${error.message}`);
+      throw new BadRequestException(error);
     }
   }
 
@@ -42,7 +47,7 @@ export class UsersService {
       });
       return payload;
     } catch (error) {
-      throw new UnauthorizedException('Token inválido o expirado');
+      throw new UnauthorizedException(error);
     }
   }
 
@@ -65,7 +70,7 @@ export class UsersService {
       if (!(await this.userModel.findById(id))) throw new Error('Usuario no existe');
       return this.userModel.findByIdAndDelete(id);
     } catch (error) {
-      throw new Error(`Error al borrar el usuario: ${error.message}`);
+      throw new BadRequestException(error);
     }
   }
 }
