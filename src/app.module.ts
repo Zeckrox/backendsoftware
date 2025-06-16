@@ -29,6 +29,6 @@ import { AuthModule } from './auth/auth.module';
     ReservationsModule,
 
     AuthModule,
-  ]
+  ],
 })
 export class AppModule {}

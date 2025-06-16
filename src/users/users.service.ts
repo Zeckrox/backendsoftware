@@ -59,7 +59,7 @@ export class UsersService {
     await this.userModel.findByIdAndUpdate(id, updateUserDto);
     const user = await this.userModel.findById(id);
     if (!user) throw new NotFoundException('User not found');
-    if(updateUserDto.password){
+    if (updateUserDto.password) {
       user.password = await bcrypt.hash(updateUserDto.password, 10);
     }
     return user.save();

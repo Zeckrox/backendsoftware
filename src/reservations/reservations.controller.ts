@@ -2,19 +2,25 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { GetAvailableSpotsDto } from './dto/get-available-spots.dto';
 
 @Controller('reservations')
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
-  @Post()
-  create(@Body() createReservationDto: CreateReservationDto) {
-    return this.reservationsService.create(createReservationDto);
+  @Post('/createReservation')
+  createReservation(@Body() createReservationDto: CreateReservationDto) {
+    return this.reservationsService.createReservation(createReservationDto);
   }
 
   @Get()
   findAll() {
     return this.reservationsService.findAll();
+  }
+
+  @Post('/availableSpots')
+  async getAvailableSpots(@Body() getAvailableSpotsDto: GetAvailableSpotsDto) {
+    return await this.reservationsService.getAvailableSpots(getAvailableSpotsDto);
   }
 
   @Get(':id')

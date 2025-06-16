@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema({ timestamps: true }) // crea createdAt y updatedAt
-export class Cubicle {
+export class Cubicle extends Document {
   @Prop({ required: true }) // debe ser unique tambien?
   number: number;
 
