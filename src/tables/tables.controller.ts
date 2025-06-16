@@ -17,6 +17,11 @@ export class TablesController {
     return this.tablesService.findAll();
   }
 
+  @Get('/getTableId/:num')
+  getTableByNumber(@Param('num') num: number) {
+    return this.tablesService.getTableByNumber(num);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.tablesService.findOne(id);
