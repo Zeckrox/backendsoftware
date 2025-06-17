@@ -5,9 +5,9 @@ export class CreateTableDto {
   @IsNotEmpty()
   number: number;
 
-  @IsInt()
+  @IsString()
   @IsNotEmpty()
-  floorNumber: number;
+  floorNumber: string;
 
   @IsString()
   @IsOptional()

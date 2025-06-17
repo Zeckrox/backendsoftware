@@ -13,6 +13,7 @@ import { Table, TableSchema } from './schema/table.schema';
       },
     ]),
   ],
+  exports: [TablesService],
   controllers: [TablesController],
   providers: [TablesService],
 })

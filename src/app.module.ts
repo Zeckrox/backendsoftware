@@ -6,6 +6,7 @@ import { TablesModule } from './tables/tables.module';
 import { CubiclesModule } from './cubicles/cubicles.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { AuthModule } from './auth/auth.module';
+import { DisabledDayModule } from './disabledDays/disabledDays.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,6 +30,8 @@ import { AuthModule } from './auth/auth.module';
     ReservationsModule,
 
     AuthModule,
-  ]
+
+    DisabledDayModule
+  ],
 })
 export class AppModule {}

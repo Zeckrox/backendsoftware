@@ -28,6 +28,9 @@ let TablesController = class TablesController {
     findAll() {
         return this.tablesService.findAll();
     }
+    getTableByNumber(num) {
+        return this.tablesService.getTableByNumber(num);
+    }
     findOne(id) {
         return this.tablesService.findOne(id);
     }
@@ -52,6 +55,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], TablesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('/getTableId/:num'),
+    __param(0, (0, common_1.Param)('num')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], TablesController.prototype, "getTableByNumber", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

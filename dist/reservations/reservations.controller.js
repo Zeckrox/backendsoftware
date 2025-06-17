@@ -17,16 +17,20 @@ const common_1 = require("@nestjs/common");
 const reservations_service_1 = require("./reservations.service");
 const create_reservation_dto_1 = require("./dto/create-reservation.dto");
 const update_reservation_dto_1 = require("./dto/update-reservation.dto");
+const get_available_spots_dto_1 = require("./dto/get-available-spots.dto");
 let ReservationsController = class ReservationsController {
     reservationsService;
     constructor(reservationsService) {
         this.reservationsService = reservationsService;
     }
-    create(createReservationDto) {
-        return this.reservationsService.create(createReservationDto);
+    createReservation(createReservationDto) {
+        return this.reservationsService.createReservation(createReservationDto);
     }
     findAll() {
         return this.reservationsService.findAll();
+    }
+    async getAvailableSpots(getAvailableSpotsDto) {
+        return await this.reservationsService.getAvailableSpots(getAvailableSpotsDto);
     }
     findOne(id) {
         return this.reservationsService.findOne(+id);
@@ -40,18 +44,25 @@ let ReservationsController = class ReservationsController {
 };
 exports.ReservationsController = ReservationsController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('/createReservation'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_reservation_dto_1.CreateReservationDto]),
     __metadata("design:returntype", void 0)
-], ReservationsController.prototype, "create", null);
+], ReservationsController.prototype, "createReservation", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ReservationsController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Post)('/availableSpots'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [get_available_spots_dto_1.GetAvailableSpotsDto]),
+    __metadata("design:returntype", Promise)
+], ReservationsController.prototype, "getAvailableSpots", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -11,7 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CubicleSchema = exports.Cubicle = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
-let Cubicle = class Cubicle {
+const mongoose_2 = require("mongoose");
+let Cubicle = class Cubicle extends mongoose_2.Document {
     number;
     floorNumber;
     room;

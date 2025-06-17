@@ -5,15 +5,67 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReservationsService = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const reservation_schema_1 = require("./schema/reservation.schema");
+const mongoose_2 = require("mongoose");
+const timeOptions_1 = require("./utils/timeOptions");
+const tables_service_1 = require("../tables/tables.service");
 let ReservationsService = class ReservationsService {
-    create(createReservationDto) {
-        return 'This action adds a new reservation';
+    reservationModel;
+    tablesService;
+    constructor(reservationModel, tablesService) {
+        this.reservationModel = reservationModel;
+        this.tablesService = tablesService;
     }
-    findAll() {
-        return `This action returns all reservations`;
+    async createReservation(createReservationDto) {
+        if (createReservationDto.type === 'table') {
+            return await this.createTableReservation(createReservationDto);
+        }
+        else if (createReservationDto.type === 'cubicle') {
+            return await this.createCubicleReservation(createReservationDto);
+        }
+    }
+    async createTableReservation(createReservationDto) {
+        const idTable = await this.tablesService.getTableByNumber(createReservationDto.number);
+        const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === createReservationDto.startTime);
+        const timeblocks = [];
+        if (startTimeOptionsIndex === -1) {
+            throw new common_1.BadRequestException('Hora de inicio no válida.');
+        }
+        for (let i = 0; i < createReservationDto.duration / 30; i++) {
+            timeblocks.push(startTimeOptionsIndex + 1 + i);
+        }
+        console.log(timeblocks);
+        try {
+            const createdReservation = new this.reservationModel({
+                ...createReservationDto,
+                userId: new mongoose_2.Types.ObjectId(createReservationDto.userId),
+                tableId: idTable,
+                timeblocks: timeblocks,
+            });
+            return await createdReservation.save();
+        }
+        catch (error) {
+            throw new Error(`Error creating reservation: ${error.message}`);
+        }
+    }
+    async createCubicleReservation(createReservationDto) { }
+    async findAll() {
+        try {
+            return await this.reservationModel.find().exec();
+        }
+        catch (error) {
+            throw new Error(`Error fetching cubicles: ${error.message}`);
+        }
     }
     findOne(id) {
         return `This action returns a #${id} reservation`;
@@ -24,9 +76,49 @@ let ReservationsService = class ReservationsService {
     remove(id) {
         return `This action removes a #${id} reservation`;
     }
+    async getAvailableSpots(getAvailableSpotsDto) {
+        const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === getAvailableSpotsDto.startTime);
+        const timeblocks = [];
+        if (!startTimeOptionsIndex)
+            return;
+        for (let i = 0; i < getAvailableSpotsDto.duration / 30; i++) {
+            timeblocks.push(startTimeOptionsIndex + 1 + i);
+        }
+        if (getAvailableSpotsDto.type === 'table') {
+            return await this.getAvailableTables(getAvailableSpotsDto.date, timeblocks);
+        }
+        else if (getAvailableSpotsDto.type === 'cubicle') {
+            return await this.getAvailableCubicles(getAvailableSpotsDto.date, timeblocks);
+        }
+    }
+    async getAvailableCubicles(findDate, findTimeblocks) {
+        const result = await this.reservationModel
+            .find({
+            tableId: { $exists: false },
+            cubicleId: { $exists: true },
+            date: findDate,
+            timeblocks: { $in: findTimeblocks },
+        })
+            .populate('cubicleId', 'floorNumber room');
+        return result;
+    }
+    async getAvailableTables(findDate, findTimeblocks) {
+        const result = await this.reservationModel
+            .find({
+            tableId: { $exists: true },
+            cubicleId: { $exists: false },
+            date: findDate,
+            timeblocks: { $in: findTimeblocks },
+        })
+            .populate('tableId', 'number floorNumber room');
+        return result;
+    }
 };
 exports.ReservationsService = ReservationsService;
 exports.ReservationsService = ReservationsService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(reservation_schema_1.Reservation.name)),
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        tables_service_1.TablesService])
 ], ReservationsService);
 //# sourceMappingURL=reservations.service.js.map

@@ -58,6 +58,14 @@ let TablesService = class TablesService {
             throw new Error(`Error removing table with id ${id}: ${error.message}`);
         }
     }
+    async getTableByNumber(num) {
+        try {
+            return await this.tableModel.findOne({ number: num });
+        }
+        catch (error) {
+            throw new Error(`Error fetching table with number ${num}: ${error.message}`);
+        }
+    }
 };
 exports.TablesService = TablesService;
 exports.TablesService = TablesService = __decorate([
