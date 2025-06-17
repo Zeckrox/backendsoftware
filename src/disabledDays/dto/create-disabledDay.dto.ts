@@ -4,4 +4,8 @@ export class CreateDisabledDayDto {
   @IsString()
   @IsNotEmpty()
   date?: string;
+
+  @IsString()
+  @IsNotEmpty()
+  type?: string;
 }
