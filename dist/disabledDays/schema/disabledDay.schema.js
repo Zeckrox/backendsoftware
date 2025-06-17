@@ -13,12 +13,17 @@ exports.DisabledDaySchema = exports.DisabledDay = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 let DisabledDay = class DisabledDay {
     date;
+    type;
 };
 exports.DisabledDay = DisabledDay;
 __decorate([
     (0, mongoose_1.Prop)({ required: true, unique: true }),
     __metadata("design:type", String)
 ], DisabledDay.prototype, "date", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], DisabledDay.prototype, "type", void 0);
 exports.DisabledDay = DisabledDay = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
 ], DisabledDay);

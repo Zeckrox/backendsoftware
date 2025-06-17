@@ -1,5 +1,6 @@
 export declare class DisabledDay {
     date: string;
+    type: string;
 }
 export declare const DisabledDaySchema: import("mongoose").Schema<DisabledDay, import("mongoose").Model<DisabledDay, any, any, any, import("mongoose").Document<unknown, any, DisabledDay, any> & DisabledDay & {
     _id: import("mongoose").Types.ObjectId;
