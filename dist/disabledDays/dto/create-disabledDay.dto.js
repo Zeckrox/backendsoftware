@@ -13,6 +13,7 @@ exports.CreateDisabledDayDto = void 0;
 const class_validator_1 = require("class-validator");
 class CreateDisabledDayDto {
     date;
+    type;
 }
 exports.CreateDisabledDayDto = CreateDisabledDayDto;
 __decorate([
@@ -20,4 +21,9 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateDisabledDayDto.prototype, "date", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateDisabledDayDto.prototype, "type", void 0);
 //# sourceMappingURL=create-disabledDay.dto.js.map
