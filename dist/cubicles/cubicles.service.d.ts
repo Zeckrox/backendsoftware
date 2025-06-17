@@ -30,4 +30,9 @@ export declare class CubiclesService {
     }> & {
         __v: number;
     }) | null>;
+    getCubicleByNumber(num: number): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
 }

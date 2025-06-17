@@ -28,6 +28,9 @@ let CubiclesController = class CubiclesController {
     findAll() {
         return this.cubiclesService.findAll();
     }
+    getCubicleByNumber(num) {
+        return this.cubiclesService.getCubicleByNumber(num);
+    }
     findOne(id) {
         return this.cubiclesService.findOne(id);
     }
@@ -52,6 +55,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], CubiclesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('/getCubicleId/:num'),
+    __param(0, (0, common_1.Param)('num')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], CubiclesController.prototype, "getCubicleByNumber", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

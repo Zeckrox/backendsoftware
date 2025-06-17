@@ -13,6 +13,7 @@ import { Cubicle, CubicleSchema } from './schema/cubicle.schema';
       },
     ]),
   ],
+  exports: [CubiclesService],
   controllers: [CubiclesController],
   providers: [CubiclesService],
 })

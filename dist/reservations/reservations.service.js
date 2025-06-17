@@ -19,12 +19,15 @@ const reservation_schema_1 = require("./schema/reservation.schema");
 const mongoose_2 = require("mongoose");
 const timeOptions_1 = require("./utils/timeOptions");
 const tables_service_1 = require("../tables/tables.service");
+const cubicles_service_1 = require("../cubicles/cubicles.service");
 let ReservationsService = class ReservationsService {
     reservationModel;
     tablesService;
-    constructor(reservationModel, tablesService) {
+    cubiclesService;
+    constructor(reservationModel, tablesService, cubiclesService) {
         this.reservationModel = reservationModel;
         this.tablesService = tablesService;
+        this.cubiclesService = cubiclesService;
     }
     async createReservation(createReservationDto) {
         if (createReservationDto.type === 'table') {
@@ -44,7 +47,6 @@ let ReservationsService = class ReservationsService {
         for (let i = 0; i < createReservationDto.duration / 30; i++) {
             timeblocks.push(startTimeOptionsIndex + 1 + i);
         }
-        console.log(timeblocks);
         try {
             const createdReservation = new this.reservationModel({
                 ...createReservationDto,
@@ -58,7 +60,30 @@ let ReservationsService = class ReservationsService {
             throw new Error(`Error creating reservation: ${error.message}`);
         }
     }
-    async createCubicleReservation(createReservationDto) { }
+    async createCubicleReservation(createReservationDto) {
+        const idCubicle = await this.cubiclesService.getCubicleByNumber(createReservationDto.number);
+        const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === createReservationDto.startTime);
+        const timeblocks = [];
+        if (startTimeOptionsIndex === -1) {
+            throw new common_1.BadRequestException('Hora de inicio no válida.');
+        }
+        for (let i = 0; i < createReservationDto.duration / 30; i++) {
+            timeblocks.push(startTimeOptionsIndex + 1 + i);
+        }
+        console.log(timeblocks);
+        try {
+            const createdReservation = new this.reservationModel({
+                ...createReservationDto,
+                userId: new mongoose_2.Types.ObjectId(createReservationDto.userId),
+                cubicleId: idCubicle,
+                timeblocks: timeblocks,
+            });
+            return await createdReservation.save();
+        }
+        catch (error) {
+            throw new Error(`Error creating reservation: ${error.message}`);
+        }
+    }
     async findAll() {
         try {
             return await this.reservationModel.find().exec();
@@ -119,6 +144,7 @@ exports.ReservationsService = ReservationsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(reservation_schema_1.Reservation.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
-        tables_service_1.TablesService])
+        tables_service_1.TablesService,
+        cubicles_service_1.CubiclesService])
 ], ReservationsService);
 //# sourceMappingURL=reservations.service.js.map

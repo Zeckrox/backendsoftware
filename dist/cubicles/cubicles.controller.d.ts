@@ -14,6 +14,11 @@ export declare class CubiclesController {
     }> & {
         __v: number;
     })[]>;
+    getCubicleByNumber(num: number): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
     findOne(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
         _id: unknown;
     }> & {

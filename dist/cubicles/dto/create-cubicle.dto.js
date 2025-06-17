@@ -24,9 +24,9 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateCubicleDto.prototype, "number", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], CreateCubicleDto.prototype, "floorNumber", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),

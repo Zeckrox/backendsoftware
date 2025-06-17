@@ -45,4 +45,12 @@ export class CubiclesService {
       throw new Error(`Error removing cubicle with id ${id}: ${error.message}`);
     }
   }
+
+  async getCubicleByNumber(num: number) {
+    try {
+      return await this.cubicleModel.findOne({ number: num });
+    } catch (error) {
+      throw new Error(`Error fetching cubicle with number ${num}: ${error.message}`);
+    }
+  }
 }

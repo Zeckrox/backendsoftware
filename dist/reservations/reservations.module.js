@@ -13,6 +13,7 @@ const reservations_controller_1 = require("./reservations.controller");
 const mongoose_1 = require("@nestjs/mongoose");
 const reservation_schema_1 = require("./schema/reservation.schema");
 const tables_module_1 = require("../tables/tables.module");
+const cubicles_module_1 = require("../cubicles/cubicles.module");
 let ReservationsModule = class ReservationsModule {
 };
 exports.ReservationsModule = ReservationsModule;
@@ -26,6 +27,7 @@ exports.ReservationsModule = ReservationsModule = __decorate([
                 },
             ]),
             tables_module_1.TablesModule,
+            cubicles_module_1.CubiclesModule,
         ],
         controllers: [reservations_controller_1.ReservationsController],
         providers: [reservations_service_1.ReservationsService],

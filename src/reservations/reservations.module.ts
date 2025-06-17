@@ -4,6 +4,7 @@ import { ReservationsController } from './reservations.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Reservation, ReservationSchema } from './schema/reservation.schema';
 import { TablesModule } from 'src/tables/tables.module';
+import { CubiclesModule } from 'src/cubicles/cubicles.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TablesModule } from 'src/tables/tables.module';
       },
     ]),
     TablesModule,
+    CubiclesModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService],

@@ -25,6 +25,7 @@ exports.CubiclesModule = CubiclesModule = __decorate([
                 },
             ]),
         ],
+        exports: [cubicles_service_1.CubiclesService],
         controllers: [cubicles_controller_1.CubiclesController],
         providers: [cubicles_service_1.CubiclesService],
     })

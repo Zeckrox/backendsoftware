@@ -4,21 +4,27 @@ import { Reservation } from './schema/reservation.schema';
 import { Model } from 'mongoose';
 import { GetAvailableSpotsDto } from './dto/get-available-spots.dto';
 import { TablesService } from 'src/tables/tables.service';
+import { CubiclesService } from 'src/cubicles/cubicles.service';
 export declare class ReservationsService {
     private reservationModel;
     private readonly tablesService;
-    constructor(reservationModel: Model<Reservation>, tablesService: TablesService);
-    createReservation(createReservationDto: CreateReservationDto): Promise<void | (import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
+    private readonly cubiclesService;
+    constructor(reservationModel: Model<Reservation>, tablesService: TablesService, cubiclesService: CubiclesService);
+    createReservation(createReservationDto: CreateReservationDto): Promise<(import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
         _id: unknown;
     }> & {
         __v: number;
-    })>;
+    }) | undefined>;
     createTableReservation(createReservationDto: CreateReservationDto): Promise<import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
         _id: unknown;
     }> & {
         __v: number;
     }>;
-    createCubicleReservation(createReservationDto: CreateReservationDto): Promise<void>;
+    createCubicleReservation(createReservationDto: CreateReservationDto): Promise<import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }>;
     findAll(): Promise<(import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
         _id: unknown;
     }> & {
