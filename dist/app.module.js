@@ -15,6 +15,7 @@ const tables_module_1 = require("./tables/tables.module");
 const cubicles_module_1 = require("./cubicles/cubicles.module");
 const reservations_module_1 = require("./reservations/reservations.module");
 const auth_module_1 = require("./auth/auth.module");
+const disabledDays_module_1 = require("./disabledDays/disabledDays.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,6 +36,7 @@ exports.AppModule = AppModule = __decorate([
             cubicles_module_1.CubiclesModule,
             reservations_module_1.ReservationsModule,
             auth_module_1.AuthModule,
+            disabledDays_module_1.DisabledDayModule
         ],
     })
 ], AppModule);
