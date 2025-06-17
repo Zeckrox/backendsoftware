@@ -35,7 +35,7 @@ let UsersService = class UsersService {
             return temp;
         }
         catch (error) {
-            throw new Error(`Error al crear usuario: ${error.message}`);
+            throw new common_1.BadRequestException(error);
         }
     }
     async findAll() {
@@ -52,7 +52,7 @@ let UsersService = class UsersService {
             return payload;
         }
         catch (error) {
-            throw new common_1.UnauthorizedException('Token inválido o expirado');
+            throw new common_1.UnauthorizedException(error);
         }
     }
     findOneByEmail(email) {
@@ -75,7 +75,7 @@ let UsersService = class UsersService {
             return this.userModel.findByIdAndDelete(id);
         }
         catch (error) {
-            throw new Error(`Error al borrar el usuario: ${error.message}`);
+            throw new common_1.BadRequestException(error);
         }
     }
 };

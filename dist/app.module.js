@@ -35,7 +35,7 @@ exports.AppModule = AppModule = __decorate([
             cubicles_module_1.CubiclesModule,
             reservations_module_1.ReservationsModule,
             auth_module_1.AuthModule,
-        ]
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

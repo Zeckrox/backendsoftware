@@ -17,6 +17,11 @@ export class CubiclesController {
     return this.cubiclesService.findAll();
   }
 
+  @Get('/getCubicleId/:num')
+  getCubicleByNumber(@Param('num') num: number) {
+    return this.cubiclesService.getCubicleByNumber(num);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.cubiclesService.findOne(id);

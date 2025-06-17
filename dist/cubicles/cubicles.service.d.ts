@@ -5,29 +5,34 @@ import { Model } from 'mongoose';
 export declare class CubiclesService {
     private cubicleModel;
     constructor(cubicleModel: Model<Cubicle>);
-    create(createCubicleDto: CreateCubicleDto): Promise<import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    create(createCubicleDto: CreateCubicleDto): Promise<import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }>;
-    findAll(): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    findAll(): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     })[]>;
-    findOne(id: string): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    findOne(id: string): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }) | null>;
-    update(id: string, updateCubicleDto: UpdateCubicleDto): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    update(id: string, updateCubicleDto: UpdateCubicleDto): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }) | null>;
-    remove(id: string): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    remove(id: string): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
+    getCubicleByNumber(num: number): Promise<(import("mongoose").Document<unknown, {}, Cubicle, {}> & Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }) | null>;
 }

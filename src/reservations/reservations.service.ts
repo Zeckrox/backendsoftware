@@ -7,12 +7,14 @@ import { Model, Types } from 'mongoose';
 import { GetAvailableSpotsDto } from './dto/get-available-spots.dto';
 import { startTimeOptions } from './utils/timeOptions';
 import { TablesService } from 'src/tables/tables.service';
+import { CubiclesService } from 'src/cubicles/cubicles.service';
 
 @Injectable()
 export class ReservationsService {
   constructor(
     @InjectModel(Reservation.name) private reservationModel: Model<Reservation>,
     private readonly tablesService: TablesService, //importo paquete de servicio
+    private readonly cubiclesService: CubiclesService, //importo paquete de servicio
   ) {}
 
   async createReservation(createReservationDto: CreateReservationDto) {
@@ -39,7 +41,7 @@ export class ReservationsService {
       timeblocks.push(startTimeOptionsIndex + 1 + i);
     }
 
-    console.log(timeblocks);
+    // console.log(timeblocks);
     try {
       const createdReservation = new this.reservationModel({
         ...createReservationDto,
@@ -53,7 +55,35 @@ export class ReservationsService {
     }
   }
 
-  async createCubicleReservation(createReservationDto: CreateReservationDto) {}
+  async createCubicleReservation(createReservationDto: CreateReservationDto) {
+    const idCubicle = await this.cubiclesService.getCubicleByNumber(createReservationDto.number);
+    const startTimeOptionsIndex = startTimeOptions.findIndex(
+      (element) => element === createReservationDto.startTime,
+    );
+    //arriba vas a conseguir el index en el array del utils startTimeOption donde el string de startTime coincida con el de este array en ese index
+    const timeblocks: number[] = [];
+
+    // if (!startTimeOptionsIndex) return;
+    if (startTimeOptionsIndex === -1) {
+      throw new BadRequestException('Hora de inicio no válida.');
+    }
+    for (let i = 0; i < createReservationDto.duration / 30; i++) {
+      timeblocks.push(startTimeOptionsIndex + 1 + i);
+    }
+
+    console.log(timeblocks);
+    try {
+      const createdReservation = new this.reservationModel({
+        ...createReservationDto,
+        userId: new Types.ObjectId(createReservationDto.userId),
+        cubicleId: idCubicle,
+        timeblocks: timeblocks,
+      });
+      return await createdReservation.save();
+    } catch (error) {
+      throw new Error(`Error creating reservation: ${error.message}`);
+    }
+  }
 
   async findAll() {
     try {

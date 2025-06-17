@@ -26,4 +26,9 @@ export declare class TablesService {
         __v: number;
     }) | null>;
     remove(id: string): Promise<void>;
+    getTableByNumber(num: number): Promise<(import("mongoose").Document<unknown, {}, Table, {}> & Table & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
 }

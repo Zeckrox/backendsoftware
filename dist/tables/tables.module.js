@@ -25,6 +25,7 @@ exports.TablesModule = TablesModule = __decorate([
                 },
             ]),
         ],
+        exports: [tables_service_1.TablesService],
         controllers: [tables_controller_1.TablesController],
         providers: [tables_service_1.TablesService],
     })

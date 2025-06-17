@@ -9,33 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateTableDto = void 0;
+exports.GetAvailableSpotsDto = void 0;
 const class_validator_1 = require("class-validator");
-class CreateTableDto {
-    number;
-    floorNumber;
-    room;
-    isAvailable = true;
+class GetAvailableSpotsDto {
+    date;
+    type;
+    startTime;
+    duration;
 }
-exports.CreateTableDto = CreateTableDto;
+exports.GetAvailableSpotsDto = GetAvailableSpotsDto;
 __decorate([
-    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsDateString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Date)
+], GetAvailableSpotsDto.prototype, "date", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], GetAvailableSpotsDto.prototype, "type", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], GetAvailableSpotsDto.prototype, "startTime", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateTableDto.prototype, "number", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateTableDto.prototype, "floorNumber", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateTableDto.prototype, "room", void 0);
-__decorate([
-    (0, class_validator_1.IsBoolean)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Boolean)
-], CreateTableDto.prototype, "isAvailable", void 0);
-//# sourceMappingURL=create-table.dto.js.map
+], GetAvailableSpotsDto.prototype, "duration", void 0);
+//# sourceMappingURL=get-available-spots.dto.js.map

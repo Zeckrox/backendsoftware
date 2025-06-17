@@ -14,6 +14,11 @@ export declare class TablesController {
     }> & {
         __v: number;
     })[]>;
+    getTableByNumber(num: number): Promise<(import("mongoose").Document<unknown, {}, import("./schema/table.schema").Table, {}> & import("./schema/table.schema").Table & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
     findOne(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/table.schema").Table, {}> & import("./schema/table.schema").Table & Required<{
         _id: unknown;
     }> & {

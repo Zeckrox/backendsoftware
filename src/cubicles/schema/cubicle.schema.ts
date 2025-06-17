@@ -7,7 +7,7 @@ export class Cubicle extends Document {
   number: number;
 
   @Prop({ required: true })
-  floorNumber: number;
+  floorNumber: string;
 
   @Prop()
   room?: string;

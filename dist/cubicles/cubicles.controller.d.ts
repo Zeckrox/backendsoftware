@@ -4,29 +4,34 @@ import { UpdateCubicleDto } from './dto/update-cubicle.dto';
 export declare class CubiclesController {
     private readonly cubiclesService;
     constructor(cubiclesService: CubiclesService);
-    create(createCubicleDto: CreateCubicleDto): Promise<import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    create(createCubicleDto: CreateCubicleDto): Promise<import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }>;
-    findAll(): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    findAll(): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     })[]>;
-    findOne(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    getCubicleByNumber(num: number): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }) | null>;
-    update(id: string, updateCubicleDto: UpdateCubicleDto): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    findOne(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }) | null>;
-    remove(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
+    update(id: string, updateCubicleDto: UpdateCubicleDto): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
+    remove(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/cubicle.schema").Cubicle, {}> & import("./schema/cubicle.schema").Cubicle & Required<{
+        _id: unknown;
+    }> & {
         __v: number;
     }) | null>;
 }
