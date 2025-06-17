@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 export declare class Table extends Document {
     number: number;
-    floorNumber: number;
+    floorNumber: string;
     room?: string;
     isAvailable?: boolean;
 }
