@@ -17,7 +17,7 @@ let DisabledDuration = class DisabledDuration {
 };
 exports.DisabledDuration = DisabledDuration;
 __decorate([
-    (0, mongoose_1.Prop)({ required: true, unique: true }),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], DisabledDuration.prototype, "date", void 0);
 __decorate([
