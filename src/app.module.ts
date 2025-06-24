@@ -7,6 +7,8 @@ import { CubiclesModule } from './cubicles/cubicles.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { AuthModule } from './auth/auth.module';
 import { DisabledDayModule } from './disabledDays/disabledDays.module';
+import { DisabledHoursModule } from './disabledHours/disabledHours.module';
+import { DisabledDurationModule } from './disabledDurations/disabledDurations.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -31,7 +33,11 @@ import { DisabledDayModule } from './disabledDays/disabledDays.module';
 
     AuthModule,
 
-    DisabledDayModule
+    DisabledDayModule,
+    
+    DisabledHoursModule,
+
+    DisabledDurationModule
   ],
 })
 export class AppModule {}
