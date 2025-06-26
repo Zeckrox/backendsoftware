@@ -20,7 +20,16 @@ export declare class ReservationsController {
     }> & {
         __v: number;
     })[] | undefined>;
+    findByUser(userId: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/reservation.schema").Reservation, {}> & import("./schema/reservation.schema").Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    })[]>;
     findOne(id: string): string;
     update(id: string, updateReservationDto: UpdateReservationDto): string;
-    remove(id: string): string;
+    eliminarReserva(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/reservation.schema").Reservation, {}> & import("./schema/reservation.schema").Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
 }

@@ -37,12 +37,21 @@ let ReservationsService = class ReservationsService {
             return await this.createCubicleReservation(createReservationDto);
         }
     }
+    async findByUserId(userId) {
+        try {
+            const objectId = new mongoose_2.Types.ObjectId(userId);
+            return await this.reservationModel.find({ userId: objectId }).exec();
+        }
+        catch (error) {
+            throw new Error(`error en fetch de reservas de este user id: ${error.message}`);
+        }
+    }
     async createTableReservation(createReservationDto) {
         const idTable = await this.tablesService.getTableByNumber(createReservationDto.number);
         const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === createReservationDto.startTime);
         const timeblocks = [];
         if (startTimeOptionsIndex === -1) {
-            throw new common_1.BadRequestException('Hora de inicio no válida.');
+            throw new common_1.BadRequestException('hora de inicio invalida');
         }
         for (let i = 0; i < createReservationDto.duration / 30; i++) {
             timeblocks.push(startTimeOptionsIndex + 1 + i);
@@ -57,7 +66,7 @@ let ReservationsService = class ReservationsService {
             return await createdReservation.save();
         }
         catch (error) {
-            throw new Error(`Error creating reservation: ${error.message}`);
+            throw new Error(`error creando reserva: ${error.message}`);
         }
     }
     async createCubicleReservation(createReservationDto) {
@@ -65,12 +74,11 @@ let ReservationsService = class ReservationsService {
         const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === createReservationDto.startTime);
         const timeblocks = [];
         if (startTimeOptionsIndex === -1) {
-            throw new common_1.BadRequestException('Hora de inicio no válida.');
+            throw new common_1.BadRequestException('hora de inicio invalida');
         }
         for (let i = 0; i < createReservationDto.duration / 30; i++) {
             timeblocks.push(startTimeOptionsIndex + 1 + i);
         }
-        console.log(timeblocks);
         try {
             const createdReservation = new this.reservationModel({
                 ...createReservationDto,
@@ -81,7 +89,7 @@ let ReservationsService = class ReservationsService {
             return await createdReservation.save();
         }
         catch (error) {
-            throw new Error(`Error creating reservation: ${error.message}`);
+            throw new Error(`error creando reserva: ${error.message}`);
         }
     }
     async findAll() {
@@ -89,7 +97,7 @@ let ReservationsService = class ReservationsService {
             return await this.reservationModel.find().exec();
         }
         catch (error) {
-            throw new Error(`Error fetching cubicles: ${error.message}`);
+            throw new Error(`error fetching reservations: ${error.message}`);
         }
     }
     findOne(id) {
@@ -98,8 +106,9 @@ let ReservationsService = class ReservationsService {
     update(id, updateReservationDto) {
         return `This action updates a #${id} reservation`;
     }
-    remove(id) {
-        return `This action removes a #${id} reservation`;
+    async eliminarReserva(id) {
+        const objectId = new mongoose_2.Types.ObjectId(id);
+        return this.reservationModel.findByIdAndDelete(objectId);
     }
     async getAvailableSpots(getAvailableSpotsDto) {
         const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === getAvailableSpotsDto.startTime);
