@@ -111,8 +111,7 @@ export class ReservationsService {
     );
     //arriba vas a conseguir el index en el array del utils startTimeOption donde el string de startTime coincida con el de este array en ese index
     const timeblocks: number[] = [];
-
-    if (!startTimeOptionsIndex) return;
+    if ( startTimeOptionsIndex < 0 ) return;
     for (let i = 0; i < getAvailableSpotsDto.duration / 30; i++) {
       timeblocks.push(startTimeOptionsIndex + 1 + i);
     }

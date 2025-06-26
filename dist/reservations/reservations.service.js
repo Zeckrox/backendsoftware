@@ -104,7 +104,7 @@ let ReservationsService = class ReservationsService {
     async getAvailableSpots(getAvailableSpotsDto) {
         const startTimeOptionsIndex = timeOptions_1.startTimeOptions.findIndex((element) => element === getAvailableSpotsDto.startTime);
         const timeblocks = [];
-        if (!startTimeOptionsIndex)
+        if (startTimeOptionsIndex < 0)
             return;
         for (let i = 0; i < getAvailableSpotsDto.duration / 30; i++) {
             timeblocks.push(startTimeOptionsIndex + 1 + i);
