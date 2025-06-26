@@ -32,14 +32,17 @@ let ReservationsController = class ReservationsController {
     async getAvailableSpots(getAvailableSpotsDto) {
         return await this.reservationsService.getAvailableSpots(getAvailableSpotsDto);
     }
+    async findByUser(userId) {
+        return this.reservationsService.findByUserId(userId);
+    }
     findOne(id) {
         return this.reservationsService.findOne(+id);
     }
     update(id, updateReservationDto) {
         return this.reservationsService.update(+id, updateReservationDto);
     }
-    remove(id) {
-        return this.reservationsService.remove(+id);
+    async eliminarReserva(id) {
+        return this.reservationsService.eliminarReserva(id);
     }
 };
 exports.ReservationsController = ReservationsController;
@@ -64,6 +67,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ReservationsController.prototype, "getAvailableSpots", null);
 __decorate([
+    (0, common_1.Get)('/reservas-user/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ReservationsController.prototype, "findByUser", null);
+__decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -83,8 +93,8 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], ReservationsController.prototype, "remove", null);
+    __metadata("design:returntype", Promise)
+], ReservationsController.prototype, "eliminarReserva", null);
 exports.ReservationsController = ReservationsController = __decorate([
     (0, common_1.Controller)('reservations'),
     __metadata("design:paramtypes", [reservations_service_1.ReservationsService])

@@ -25,6 +25,15 @@ export class ReservationsService {
     }
   }
 
+  async findByUserId(userId: string) {
+    try {
+      const objectId = new Types.ObjectId(userId); //mongo no reconoce strings si son ids! recordar
+      return await this.reservationModel.find({ userId: objectId }).exec();
+    } catch (error) {
+      throw new Error(`error en fetch de reservas de este user id: ${error.message}`);
+    }
+  }
+
   async createTableReservation(createReservationDto: CreateReservationDto) {
     const idTable = await this.tablesService.getTableByNumber(createReservationDto.number);
     const startTimeOptionsIndex = startTimeOptions.findIndex(
@@ -35,7 +44,7 @@ export class ReservationsService {
 
     // if (!startTimeOptionsIndex) return;
     if (startTimeOptionsIndex === -1) {
-      throw new BadRequestException('Hora de inicio no válida.');
+      throw new BadRequestException('hora de inicio invalida');
     }
     for (let i = 0; i < createReservationDto.duration / 30; i++) {
       timeblocks.push(startTimeOptionsIndex + 1 + i);
@@ -45,13 +54,13 @@ export class ReservationsService {
     try {
       const createdReservation = new this.reservationModel({
         ...createReservationDto,
-        userId: new Types.ObjectId(createReservationDto.userId),
+        userId: new Types.ObjectId(createReservationDto.userId), //mongo no reconoce strings si son ids! recordar
         tableId: idTable,
         timeblocks: timeblocks,
       });
       return await createdReservation.save();
     } catch (error) {
-      throw new Error(`Error creating reservation: ${error.message}`);
+      throw new Error(`error creando reserva: ${error.message}`);
     }
   }
 
@@ -65,23 +74,23 @@ export class ReservationsService {
 
     // if (!startTimeOptionsIndex) return;
     if (startTimeOptionsIndex === -1) {
-      throw new BadRequestException('Hora de inicio no válida.');
+      throw new BadRequestException('hora de inicio invalida');
     }
     for (let i = 0; i < createReservationDto.duration / 30; i++) {
       timeblocks.push(startTimeOptionsIndex + 1 + i);
     }
 
-    console.log(timeblocks);
+    // console.log(timeblocks);
     try {
       const createdReservation = new this.reservationModel({
         ...createReservationDto,
-        userId: new Types.ObjectId(createReservationDto.userId),
+        userId: new Types.ObjectId(createReservationDto.userId), //mongo no reconoce strings si son ids! recordar
         cubicleId: idCubicle,
         timeblocks: timeblocks,
       });
       return await createdReservation.save();
     } catch (error) {
-      throw new Error(`Error creating reservation: ${error.message}`);
+      throw new Error(`error creando reserva: ${error.message}`);
     }
   }
 
@@ -89,7 +98,7 @@ export class ReservationsService {
     try {
       return await this.reservationModel.find().exec();
     } catch (error) {
-      throw new Error(`Error fetching cubicles: ${error.message}`);
+      throw new Error(`error fetching reservations: ${error.message}`);
     }
   }
 
@@ -101,8 +110,9 @@ export class ReservationsService {
     return `This action updates a #${id} reservation`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
+  async eliminarReserva(id: string) {
+    const objectId = new Types.ObjectId(id); //mongo no reconoce strings si son ids! recordar
+    return this.reservationModel.findByIdAndDelete(objectId);
   }
 
   async getAvailableSpots(getAvailableSpotsDto: GetAvailableSpotsDto) {

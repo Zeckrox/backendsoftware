@@ -23,6 +23,11 @@ export class ReservationsController {
     return await this.reservationsService.getAvailableSpots(getAvailableSpotsDto);
   }
 
+  @Get('/reservas-user/:id')
+  async findByUser(@Param('id') userId: string) {
+    return this.reservationsService.findByUserId(userId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reservationsService.findOne(+id);
@@ -34,7 +39,7 @@ export class ReservationsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservationsService.remove(+id);
+  async eliminarReserva(@Param('id') id: string) {
+    return this.reservationsService.eliminarReserva(id);
   }
 }
