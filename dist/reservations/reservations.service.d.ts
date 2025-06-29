@@ -15,6 +15,11 @@ export declare class ReservationsService {
     }> & {
         __v: number;
     }) | undefined>;
+    findByUserId(userId: string): Promise<(import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    })[]>;
     createTableReservation(createReservationDto: CreateReservationDto): Promise<import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
         _id: unknown;
     }> & {
@@ -32,7 +37,11 @@ export declare class ReservationsService {
     })[]>;
     findOne(id: number): string;
     update(id: number, updateReservationDto: UpdateReservationDto): string;
-    remove(id: number): string;
+    eliminarReserva(id: string): Promise<(import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }) | null>;
     getAvailableSpots(getAvailableSpotsDto: GetAvailableSpotsDto): Promise<(import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
         _id: unknown;
     }> & {
