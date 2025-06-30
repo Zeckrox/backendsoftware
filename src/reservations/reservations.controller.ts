@@ -38,6 +38,11 @@ export class ReservationsController {
     return this.reservationsService.update(+id, updateReservationDto);
   }
 
+  @Patch('update-people/:id')
+  async updatePeople(@Param('id') id: string, @Body('people') people: number) {
+    return this.reservationsService.updatePeople(id, people);
+  }
+
   @Delete(':id')
   async eliminarReserva(@Param('id') id: string) {
     return this.reservationsService.eliminarReserva(id);

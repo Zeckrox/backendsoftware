@@ -18,6 +18,7 @@ class CreateReservationDto {
     date;
     startTime;
     duration;
+    people;
 }
 exports.CreateReservationDto = CreateReservationDto;
 __decorate([
@@ -50,4 +51,9 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
 ], CreateReservationDto.prototype, "duration", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], CreateReservationDto.prototype, "people", void 0);
 //# sourceMappingURL=create-reservation.dto.js.map

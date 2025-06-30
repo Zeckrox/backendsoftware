@@ -1,13 +1,4 @@
-import {
-  IsNotEmpty,
-  IsDateString,
-  IsArray,
-  IsNumber,
-  IsObject,
-  IsMongoId,
-  IsString,
-  IsOptional,
-} from 'class-validator';
+import { IsNotEmpty, IsDateString, IsNumber, IsMongoId, IsString } from 'class-validator';
 
 export class CreateReservationDto {
   @IsMongoId()
@@ -21,6 +12,22 @@ export class CreateReservationDto {
   @IsString()
   @IsNotEmpty()
   type: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  date: string;
+
+  @IsString()
+  @IsNotEmpty()
+  startTime: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  duration: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  people: number;
 
   // @IsMongoId()
   // @IsOptional()
@@ -41,18 +48,4 @@ export class CreateReservationDto {
   // @IsString()
   // @IsNotEmpty()
   // room: string;
-
-  @IsDateString()
-  @IsNotEmpty()
-  date: string;
-
-  @IsString()
-  @IsNotEmpty()
-  // @IsOptional()
-  startTime: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  // @IsOptional()
-  duration: number;
 }

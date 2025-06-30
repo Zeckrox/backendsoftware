@@ -25,6 +25,12 @@ export class User extends Document {
   @Prop({ required: true })
   password: string;
 
+  @Prop({ required: true })
+  phoneNumber: string;
+
+  @Prop({ required: true, enum: ['Mujer', 'Hombre', 'Otro'] })
+  gender: string;
+
   //no user id, no necesitamos un campo llamado userId que referencia al mismo modelo User, es decir un usuario tiene un campo userId que apunta a otro usuario
 }
 

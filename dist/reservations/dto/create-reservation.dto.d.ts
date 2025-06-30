@@ -5,4 +5,5 @@ export declare class CreateReservationDto {
     date: string;
     startTime: string;
     duration: number;
+    people: number;
 }

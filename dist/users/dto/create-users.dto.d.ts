@@ -6,4 +6,6 @@ export declare class CreateUserDto {
     role: string;
     career: string;
     password: string;
+    phoneNumber: string;
+    gender: string;
 }

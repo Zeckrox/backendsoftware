@@ -1,4 +1,4 @@
-import { IsString, IsDateString, IsNotEmpty, IsArray, IsOptional, IsNumber } from 'class-validator';
+import { IsString, IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class GetAvailableSpotsDto {
   @IsDateString()

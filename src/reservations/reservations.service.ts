@@ -28,9 +28,30 @@ export class ReservationsService {
   async findByUserId(userId: string) {
     try {
       const objectId = new Types.ObjectId(userId); //mongo no reconoce strings si son ids! recordar
-      return await this.reservationModel.find({ userId: objectId }).exec();
+      return await this.reservationModel
+        .find({ userId: objectId })
+        ?.populate('cubicleId', 'room')
+        ?.populate('tableId', 'room')
+        .exec();
     } catch (error) {
       throw new Error(`error en fetch de reservas de este user id: ${error.message}`);
+    }
+  }
+
+  async updatePeople(id: string, people: number) {
+    try {
+      const objectId = new Types.ObjectId(id);
+      const updatedReservation = await this.reservationModel.findByIdAndUpdate(
+        objectId,
+        { people: people },
+        { new: true },
+      );
+      if (!updatedReservation) {
+        throw new BadRequestException('reserva not found');
+      }
+      return updatedReservation;
+    } catch (error) {
+      throw new Error(`error actualizando cant de personas: ${error.message}`);
     }
   }
 
@@ -121,7 +142,7 @@ export class ReservationsService {
     );
     //arriba vas a conseguir el index en el array del utils startTimeOption donde el string de startTime coincida con el de este array en ese index
     const timeblocks: number[] = [];
-    if ( startTimeOptionsIndex < 0 ) return;
+    if (startTimeOptionsIndex < 0) return;
     for (let i = 0; i < getAvailableSpotsDto.duration / 30; i++) {
       timeblocks.push(startTimeOptionsIndex + 1 + i);
     }

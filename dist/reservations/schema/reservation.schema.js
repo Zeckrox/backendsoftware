@@ -21,6 +21,7 @@ let Reservation = class Reservation extends mongoose_2.Document {
     number;
     floorNumber;
     room;
+    people;
     weekday;
 };
 exports.Reservation = Reservation;
@@ -56,6 +57,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: String }),
     __metadata("design:type", String)
 ], Reservation.prototype, "room", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Number }),
+    __metadata("design:type", Number)
+], Reservation.prototype, "people", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: String }),
     __metadata("design:type", String)
