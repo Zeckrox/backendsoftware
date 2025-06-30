@@ -20,6 +20,11 @@ export declare class ReservationsService {
     }> & {
         __v: number;
     })[]>;
+    updatePeople(id: string, people: number): Promise<import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }>;
     createTableReservation(createReservationDto: CreateReservationDto): Promise<import("mongoose").Document<unknown, {}, Reservation, {}> & Reservation & Required<{
         _id: unknown;
     }> & {

@@ -40,10 +40,27 @@ let ReservationsService = class ReservationsService {
     async findByUserId(userId) {
         try {
             const objectId = new mongoose_2.Types.ObjectId(userId);
-            return await this.reservationModel.find({ userId: objectId }).exec();
+            return await this.reservationModel
+                .find({ userId: objectId })
+                ?.populate('cubicleId', 'room')
+                ?.populate('tableId', 'room')
+                .exec();
         }
         catch (error) {
             throw new Error(`error en fetch de reservas de este user id: ${error.message}`);
+        }
+    }
+    async updatePeople(id, people) {
+        try {
+            const objectId = new mongoose_2.Types.ObjectId(id);
+            const updatedReservation = await this.reservationModel.findByIdAndUpdate(objectId, { people: people }, { new: true });
+            if (!updatedReservation) {
+                throw new common_1.BadRequestException('reserva not found');
+            }
+            return updatedReservation;
+        }
+        catch (error) {
+            throw new Error(`error actualizando cant de personas: ${error.message}`);
         }
     }
     async createTableReservation(createReservationDto) {

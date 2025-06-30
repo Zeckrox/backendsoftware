@@ -20,6 +20,8 @@ let User = class User extends mongoose_2.Document {
     role;
     career;
     password;
+    phoneNumber;
+    gender;
 };
 exports.User = User;
 __decorate([
@@ -50,6 +52,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], User.prototype, "phoneNumber", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true, enum: ['Mujer', 'Hombre', 'Otro'] }),
+    __metadata("design:type", String)
+], User.prototype, "gender", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
 ], User);

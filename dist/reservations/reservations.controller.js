@@ -41,6 +41,9 @@ let ReservationsController = class ReservationsController {
     update(id, updateReservationDto) {
         return this.reservationsService.update(+id, updateReservationDto);
     }
+    async updatePeople(id, people) {
+        return this.reservationsService.updatePeople(id, people);
+    }
     async eliminarReserva(id) {
         return this.reservationsService.eliminarReserva(id);
     }
@@ -88,6 +91,14 @@ __decorate([
     __metadata("design:paramtypes", [String, update_reservation_dto_1.UpdateReservationDto]),
     __metadata("design:returntype", void 0)
 ], ReservationsController.prototype, "update", null);
+__decorate([
+    (0, common_1.Patch)('update-people/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('people')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:returntype", Promise)
+], ReservationsController.prototype, "updatePeople", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),

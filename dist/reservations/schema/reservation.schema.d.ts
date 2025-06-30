@@ -8,6 +8,7 @@ export declare class Reservation extends Document {
     number: number;
     floorNumber: string;
     room: string;
+    people: number;
     weekday?: string;
 }
 export declare const ReservationSchema: import("mongoose").Schema<Reservation, import("mongoose").Model<Reservation, any, any, any, Document<unknown, any, Reservation, any> & Reservation & Required<{

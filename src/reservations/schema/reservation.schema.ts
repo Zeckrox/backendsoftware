@@ -28,6 +28,9 @@ export class Reservation extends Document {
   @Prop({ type: String })
   room: string;
 
+  @Prop({ type: Number })
+  people: number;
+
   @Prop({ type: String })
   weekday?: string;
 }

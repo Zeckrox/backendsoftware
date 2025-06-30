@@ -27,6 +27,11 @@ export declare class ReservationsController {
     })[]>;
     findOne(id: string): string;
     update(id: string, updateReservationDto: UpdateReservationDto): string;
+    updatePeople(id: string, people: number): Promise<import("mongoose").Document<unknown, {}, import("./schema/reservation.schema").Reservation, {}> & import("./schema/reservation.schema").Reservation & Required<{
+        _id: unknown;
+    }> & {
+        __v: number;
+    }>;
     eliminarReserva(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/reservation.schema").Reservation, {}> & import("./schema/reservation.schema").Reservation & Required<{
         _id: unknown;
     }> & {
