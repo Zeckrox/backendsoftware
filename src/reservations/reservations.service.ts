@@ -97,8 +97,8 @@ export class ReservationsService {
     if (startTimeOptionsIndex === -1) {
       throw new BadRequestException('hora de inicio invalida');
     }
-    for (let i = 0; i < createReservationDto.duration / 30; i++) {
-      timeblocks.push(startTimeOptionsIndex + 1 + i);
+    for (let i = 0; i < (createReservationDto.duration / 30)+1; i++) {
+      timeblocks.push(startTimeOptionsIndex + i);
     }
 
     // console.log(timeblocks);
