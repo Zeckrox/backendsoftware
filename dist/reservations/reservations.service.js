@@ -73,7 +73,6 @@ let ReservationsService = class ReservationsService {
         for (let i = 0; i < (createReservationDto.duration / 30) + 1; i++) {
             timeblocks.push(startTimeOptionsIndex + i);
         }
-        console.log(timeblocks);
         try {
             const createdReservation = new this.reservationModel({
                 ...createReservationDto,
@@ -94,8 +93,8 @@ let ReservationsService = class ReservationsService {
         if (startTimeOptionsIndex === -1) {
             throw new common_1.BadRequestException('hora de inicio invalida');
         }
-        for (let i = 0; i < createReservationDto.duration / 30; i++) {
-            timeblocks.push(startTimeOptionsIndex + 1 + i);
+        for (let i = 0; i < (createReservationDto.duration / 30) + 1; i++) {
+            timeblocks.push(startTimeOptionsIndex + i);
         }
         try {
             const createdReservation = new this.reservationModel({
